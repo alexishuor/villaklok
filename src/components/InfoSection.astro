@@ -1,0 +1,113 @@
+---
+---
+<section id="info" class="py-12 md:py-16 px-5 bg-navy-900 border-t border-navy-700">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="mb-8">
+      <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy-800 border border-navy-600
+                   text-xs font-600 text-solar-amber tracking-widest uppercase mb-4">
+        Om kalkylatorn
+      </span>
+      <h2 class="font-syne font-800 text-white text-2xl sm:text-3xl mb-3">
+        Hur vi beräknar din <span class="text-solar-amber">solcellskalkyl</span>
+      </h2>
+      <p class="font-dm text-slate-400 text-sm sm:text-base leading-relaxed">
+        Vår <strong class="text-white">solcellskalkylator</strong> baseras på genomsnittliga soltimmar i Sverige
+        och tar hänsyn till det statliga
+        <strong class="text-white">Grön Teknik-avdraget</strong> som från 2026 ger dig
+        <strong class="text-solar-green">14,55% reduktion på solpaneler</strong> och
+        <strong class="text-solar-green">48,5% på batterilagring</strong> (max 50 000 kr per person/år).
+        Kalkylen täcker <strong class="text-white">solceller tak pris</strong>, produktion och återbetalningstid.
+      </p>
+    </div>
+
+    <!-- 2026 ALERT -->
+    <div class="flex items-start gap-4 bg-solar-amber/8 border border-solar-amber/25 rounded-xl p-5 mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-solar-amber flex-shrink-0 mt-0.5"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <div>
+        <strong class="block text-solar-amber font-syne font-700 text-sm mb-1">Viktigt för 2026</strong>
+        <p class="text-sm text-slate-400 leading-relaxed m-0">
+          Från 1 januari 2026 upphör skattereduktionen för mikroproduktion (60 öre/kWh).
+          Överskottsel säljs nu till ~0,50 kr/kWh (spotpris). Det gör självkonsumtion
+          <strong class="text-white">3–3,5× mer lönsam</strong> än att sälja till nätet.
+        </p>
+      </div>
+    </div>
+
+    <!-- INFO CARDS GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+
+      <div class="bg-navy-800 border border-navy-600 rounded-xl p-5">
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <span class="font-syne font-700 text-sm text-white">Utan batteri</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed m-0">
+          Autokonsumsionsgrad ~32%. Varje egenproducerad kWh sparar 1,40–1,75 kr.
+          Överskott säljs till ~0,50 kr/kWh. Optimal lösning för de som inte vill
+          öka investeringen.
+        </p>
+      </div>
+
+      <div class="bg-navy-800 border border-solar-green/25 rounded-xl p-5"
+           style="background:linear-gradient(135deg,#0A1F12,#0D1520)">
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-solar-green/15 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-solar-green" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <span class="font-syne font-700 text-sm text-solar-green">Med batteri</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed m-0">
+          Autokonsumsionsgrad ~65% — <strong class="text-solar-green">dubbelt</strong> jämfört med utan.
+          48,5% Grön Teknik-avdrag på batteriet. Betydligt bättre lönsamhet
+          trots högre initial investering.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- EXAMPLE CALC -->
+    <div class="bg-navy-700/50 border border-navy-600 rounded-xl p-5">
+      <h3 class="font-syne font-700 text-sm text-slate-300 mb-3 uppercase tracking-wider">
+        📊 Räkneexempel: Villa i SE3 med 80 m²
+      </h3>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+        <div class="flex justify-between border-b border-navy-600 pb-2">
+          <span class="text-slate-500">Utan batteri, sparar/år:</span>
+          <span class="font-700 text-white">~11 700 kr</span>
+        </div>
+        <div class="flex justify-between border-b border-navy-600 pb-2">
+          <span class="text-slate-500">Med batteri, sparar/år:</span>
+          <span class="font-700 text-solar-green">~16 700 kr</span>
+        </div>
+        <div class="flex justify-between border-b border-navy-600 pb-2">
+          <span class="text-slate-500">Återbetalningstid utan:</span>
+          <span class="font-700 text-solar-amber">13,7 år</span>
+        </div>
+        <div class="flex justify-between border-b border-navy-600 pb-2">
+          <span class="text-slate-500">Återbetalningstid med:</span>
+          <span class="font-700 text-solar-amber">11,6 år</span>
+        </div>
+      </div>
+      <p class="text-xs text-slate-600 mt-3 m-0">
+        Data baseras på genomsnittliga soltimmar (950 kWh/kWp i SE3), elpris 1,60 kr/kWh och
+        Grön Teknik-avdraget 2026.
+      </p>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,546 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Solcellskalkylator 2026 | Beräkna solceller tak, pris & ROI för din villa',
+  description = 'Gratis solcellskalkylator för villa. Beräkna solceller tak — pris, återbetalningstid och besparing på 30 sekunder. Uppdaterad med Grön Teknik-avdraget 2026.',
+  canonical = 'https://villaklok.se/',
+} = Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Är solceller lönsamt 2026 efter att 60-öringen försvunnit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, solceller är fortfarande lönsamma 2026. Fokus har skiftat till egenkonsumtion – varje kWh du använder själv sparar 1,40–1,75 kr, jämfört med ~0,50 kr vid försäljning till nätet. Med batteri ökar självkonsumtionen från ~32% till ~65%, vilket ger betydligt bättre lönsamhet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vad är Grön Teknik-avdraget 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Grön Teknik-avdraget ger 14,55% reduktion på solpaneler och 48,5% på batterilagring (max 50 000 kr per person/år). Avdraget dras direkt av på fakturan från installatören."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hur lång är återbetalningstiden för solceller i Sverige?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Återbetalningstiden varierar beroende på elområde, takyta och riktning, men är typiskt 10–14 år för en villa i Sverige. Med batteri och i södra Sverige (SE4) kan den vara så kort som 9–11 år."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vad kostar solceller för en villa 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En typisk villa med 80 m² takyta kostar ca 195 000 kr brutto för installation. Efter Grön Teknik-avdraget (14,55%) blir nettoinvesteringen ca 145 000 kr. Priset varierar med systemstorlek och installatör."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hur fungerar kalkylatorns beräkningar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kalkylatorn beräknar din villa specifika produktion baserat på takyta, elområde (SE1–SE4), takriktning och lutning. Den tar hänsyn till aktuellt elpris, Grön Teknik-avdrag och 30 års elprisutveckling med 2% årlig inflation."
+      }
+    }
+  ]
+};
+
+const appSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Solcellskalkylator Sverige 2026",
+  "description": "Beräkna ROI, besparing och återbetalningstid för solceller på din villa",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SEK" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Villaklok.se",
+    "url": "https://villaklok.se"
+  }
+};
+---
+<!DOCTYPE html>
+<html lang="sv" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale"      content="sv_SE" />
+
+  <!-- Preconnect fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(appSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <style is:global>
+    /* ── BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #060B16;
+      color: #E2E8F0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0A1628; }
+    ::-webkit-scrollbar-thumb { background: #2A3F5C; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
+
+    /* ── TYPOGRAPHY ── */
+    h1,h2,h3,h4 {
+      font-family: 'Syne', sans-serif;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── SELECTION ── */
+    ::selection { background: rgba(245,158,11,0.25); color: #FCD34D; }
+
+    /* ── TOGGLE SWITCH ── */
+    .toggle-input { display: none; }
+
+    .toggle-label {
+      position: relative;
+      display: inline-flex;
+      width: 56px;
+      height: 30px;
+      background: #1E2D42;
+      border: 1px solid #2A3F5C;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+      flex-shrink: 0;
+    }
+
+    .toggle-input:checked + .toggle-label {
+      background: #10B981;
+      border-color: #10B981;
+    }
+
+    .toggle-switch {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .toggle-input:checked + .toggle-label .toggle-switch {
+      transform: translateX(26px);
+    }
+
+    /* ── FORM INPUTS DARK ── */
+    .calc-input {
+      width: 100%;
+      padding: 13px 16px;
+      background: #0D1520;
+      border: 1.5px solid #1E2D42;
+      border-radius: 10px;
+      color: #F1F5F9;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
+    }
+
+    .calc-input::placeholder { color: #475569; }
+
+    .calc-input:focus {
+      border-color: #F59E0B;
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+    }
+
+    select.calc-input {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F59E0B' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 42px;
+      cursor: pointer;
+    }
+
+    select.calc-input option {
+      background: #0D1520;
+      color: #F1F5F9;
+    }
+
+    /* ── CTA PULSE ANIMATION ── */
+    @keyframes pulseCta {
+      0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.5); }
+      50%      { box-shadow: 0 0 0 18px rgba(245,158,11,0); }
+    }
+    .cta-pulse { animation: pulseCta 2.8s ease-in-out infinite; }
+
+    /* ── PING DOT ── */
+    @keyframes pingDot {
+      75%,100% { transform: scale(2.2); opacity: 0; }
+    }
+    .ping-dot { animation: pingDot 2s cubic-bezier(0,0,0.2,1) infinite; }
+
+    /* ── FADE UP ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.55s ease-out both; }
+
+    /* ── COUNT FLASH ── */
+    @keyframes countFlash {
+      0%   { color: #F59E0B; transform: scale(1.06); }
+      100% { color: inherit; transform: scale(1); }
+    }
+    .count-flash { animation: countFlash 0.35s ease-out both; }
+
+    /* ── SUN SPIN ── */
+    @keyframes sunSpin { to { transform: rotate(360deg); } }
+    .sun-spin { animation: sunSpin 22s linear infinite; }
+
+    /* ── PROGRESS BAR ── */
+    .progress-fill { transition: width 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+
+    /* ── RESULT CARDS ── */
+    .res-card {
+      background: #0D1520;
+      border: 1px solid #1E2D42;
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .res-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .res-card.card-hero {
+      background: linear-gradient(135deg, #0D1520, #0A1F12);
+      border-color: rgba(16,185,129,0.4);
+      box-shadow: 0 0 25px rgba(16,185,129,0.12);
+    }
+    .res-card.card-roi {
+      border-top: 3px solid #F59E0B;
+    }
+
+    /* ── CPA SECTION (post-calculator) ── */
+    .cpa-section {
+      background: linear-gradient(135deg, #0A1628 0%, #0C1F12 100%);
+      border: 1.5px solid rgba(245,158,11,0.35);
+      border-radius: 20px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .cpa-section::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cpa-section::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 10%;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE NAV DRAWER — Complete Styles
+    ══════════════════════════════════════ */
+
+    /* Backdrop */
+    .mobile-nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.60);
+      z-index: 99;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+    .mobile-nav-backdrop.open { display: block; }
+
+    /* Drawer container */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(82vw, 300px);
+      height: 100dvh;
+      background: #0A1628;
+      border-left: 1px solid rgba(30,45,66,0.8);
+      box-shadow: -16px 0 60px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: right 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .mobile-nav.open { right: 0; }
+
+    /* ── Drawer header (logo + X button) ── */
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 16px;
+      flex-shrink: 0;
+    }
+
+    .drawer-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .drawer-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .drawer-logo-text span {
+      color: #F59E0B;
+      font-weight: 400;
+    }
+
+    .drawer-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: #131E2E;
+      border: 1px solid #1E2D42;
+      color: #94A3B8;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+    .drawer-close-btn:hover {
+      background: #1E2D42;
+      color: #F59E0B;
+      border-color: rgba(245,158,11,0.4);
+    }
+    .drawer-close-btn:active {
+      transform: scale(0.93);
+    }
+
+    /* ── Drawer divider ── */
+    .drawer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #1E2D42 20%, #1E2D42 80%, transparent);
+      flex-shrink: 0;
+      margin: 0 16px;
+    }
+
+    /* ── Drawer nav links ── */
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      padding: 8px 0;
+      flex-shrink: 0;
+    }
+
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 13px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #CBD5E1;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s, padding-left 0.2s;
+      position: relative;
+    }
+    .drawer-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) scaleY(0);
+      width: 3px;
+      height: 60%;
+      background: #F59E0B;
+      border-radius: 0 2px 2px 0;
+      transition: transform 0.2s;
+    }
+    .drawer-link:hover {
+      background: rgba(245,158,11,0.06);
+      color: #F1F5F9;
+      padding-left: 24px;
+    }
+    .drawer-link:hover::before {
+      transform: translateY(-50%) scaleY(1);
+    }
+
+    .drawer-link-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.14);
+      color: #F59E0B;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .drawer-link:hover .drawer-link-icon {
+      background: rgba(245,158,11,0.15);
+      border-color: rgba(245,158,11,0.3);
+    }
+
+    .drawer-link-arrow {
+      margin-left: auto;
+      color: #334155;
+      flex-shrink: 0;
+      transition: color 0.15s, transform 0.2s;
+    }
+    .drawer-link:hover .drawer-link-arrow {
+      color: #F59E0B;
+      transform: translateX(3px);
+    }
+
+    /* ── Drawer CTA ── */
+    .drawer-cta-wrap {
+      padding: 16px 20px 32px;
+      margin-top: auto;
+      flex-shrink: 0;
+    }
+
+    .drawer-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: #000;
+      background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
+      box-shadow: 0 0 28px rgba(245,158,11,0.30), 0 4px 16px rgba(245,158,11,0.18);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      animation: pulseCta 2.8s ease-in-out infinite;
+      transition: transform 0.15s;
+    }
+    .drawer-cta-btn:hover  { transform: scale(1.02); }
+    .drawer-cta-btn:active { transform: scale(0.97); }
+
+    .drawer-cta-sub {
+      text-align: center;
+      font-size: 11px;
+      color: #334155;
+      margin-top: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── FAQ ACCORDION ── */
+    .faq-item details > summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #F1F5F9;
+      border-bottom: 1px solid #1E2D42;
+      transition: color 0.2s;
+    }
+    .faq-item details > summary::-webkit-details-marker { display: none; }
+    .faq-item details[open] > summary { color: #F59E0B; }
+    .faq-item details[open] > summary .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.3s; color: #F59E0B; flex-shrink: 0; }
+    .faq-body {
+      padding: 16px 20px 20px;
+      font-size: 0.92rem;
+      color: #94A3B8;
+      line-height: 1.75;
+      border-bottom: 1px solid #1E2D42;
+    }
+
+    /* ── PRINT HIDE ── */
+    @media print {
+      .navbar, .ad-disclosure, .cpa-section, .final-cta, footer { display: none; }
+    }
+
+    /* ── MOTION PREFERENCE ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

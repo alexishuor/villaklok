@@ -1,0 +1,71 @@
+---
+// Top Swedish municipalities by population — high solar potential
+// These link to future /solceller-[stad] pages
+// For now they use anchor # until those pages are built
+const cities = [
+  // SE3 — Stockholm region
+  { name: 'Stockholm',  slug: 'stockholm',  zone: 'SE3' },
+  { name: 'Göteborg',   slug: 'goteborg',   zone: 'SE3' },
+  { name: 'Uppsala',    slug: 'uppsala',    zone: 'SE3' },
+  { name: 'Västerås',   slug: 'vasteras',   zone: 'SE3' },
+  { name: 'Örebro',     slug: 'orebro',     zone: 'SE3' },
+  { name: 'Linköping',  slug: 'linkoping',  zone: 'SE3' },
+  // SE4 — Skåne/Malmö (best ROI)
+  { name: 'Malmö',      slug: 'malmo',      zone: 'SE4' },
+  { name: 'Helsingborg',slug: 'helsingborg',zone: 'SE4' },
+  { name: 'Lund',       slug: 'lund',       zone: 'SE4' },
+  { name: 'Kristianstad',slug:'kristianstad',zone: 'SE4' },
+  { name: 'Halmstad',   slug: 'halmstad',   zone: 'SE4' },
+  // SE2 — Mellansverige
+  { name: 'Sundsvall',  slug: 'sundsvall',  zone: 'SE2' },
+  { name: 'Gävle',      slug: 'gavle',      zone: 'SE2' },
+  { name: 'Falun',      slug: 'falun',      zone: 'SE2' },
+  // SE1 — Norra
+  { name: 'Umeå',       slug: 'umea',       zone: 'SE1' },
+  { name: 'Luleå',      slug: 'lulea',      zone: 'SE1' },
+];
+
+const zoneColors: Record<string, string> = {
+  SE1: 'text-blue-400 border-blue-500/20 bg-blue-500/8',
+  SE2: 'text-cyan-400 border-cyan-500/20 bg-cyan-500/8',
+  SE3: 'text-solar-amber border-solar-amber/20 bg-solar-amber/8',
+  SE4: 'text-solar-green border-solar-green/20 bg-solar-green/8',
+};
+---
+
+<section class="py-10 md:py-12 px-5 bg-navy-950 border-t border-navy-700/50">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="mb-6">
+      <span class="text-[11px] font-700 uppercase tracking-[2px] text-slate-600 block mb-1">
+        Solceller per stad
+      </span>
+      <h2 class="font-syne font-700 text-slate-400 text-base sm:text-lg">
+        Beräkna <span class="text-slate-300">solceller på tak</span> — välj din stad
+      </h2>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      {cities.map(city => (
+        <a
+          href={`/solceller-${city.slug}`}
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg
+                 bg-navy-800 border border-navy-600
+                 font-dm font-500 text-[0.78rem] text-slate-400
+                 hover:text-white hover:border-solar-amber/40
+                 transition-all duration-150"
+        >
+          <span class={`text-[10px] font-700 px-1.5 py-0.5 rounded border ${zoneColors[city.zone]}`}>
+            {city.zone}
+          </span>
+          Solceller {city.name}
+        </a>
+      ))}
+    </div>
+
+    <p class="text-[11px] text-slate-700 mt-4 leading-relaxed">
+      Solceller pris och lönsamhetskalkyl varierar per elområde. Välj din stad för lokal beräkning.
+    </p>
+
+  </div>
+</section>

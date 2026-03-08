@@ -1,0 +1,730 @@
+---
+---
+<section id="kalkylator" class="py-12 md:py-16 lg:py-20 px-5 max-w-6xl mx-auto">
+
+  <!-- SECTION HEADER -->
+  <div class="text-center mb-10">
+    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy-800 border border-navy-600
+                 text-xs font-600 text-solar-amber tracking-widest uppercase mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+      Kalkylator 2026
+    </span>
+    <h2 class="font-syne font-800 text-white text-3xl sm:text-4xl mb-3">
+      Din personliga <span class="text-solar-amber">solcellskalkyl</span>
+    </h2>
+    <p class="font-dm text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+      Fyll i uppgifterna nedan — <strong class="text-white">beräkna solceller</strong> tak, pris och lönsamhet direkt. Inga e-postadresser krävs.
+    </p>
+  </div>
+
+  <!-- CALC CARD -->
+  <div class="bg-navy-800 border border-navy-600 rounded-2xl overflow-hidden shadow-card">
+
+    <!-- PROGRESS BAR -->
+    <div class="px-6 pt-5 pb-0">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-600 text-slate-500 uppercase tracking-widest">Din framsteg</span>
+        <span id="progress-label" class="text-xs font-700 text-solar-amber">Fyll i takyta för att börja</span>
+      </div>
+      <div class="h-1.5 bg-navy-700 rounded-full overflow-hidden mb-5">
+        <div id="progress-bar" class="h-full bg-amber-gradient rounded-full progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="px-6 pb-6">
+
+      <!-- 30-SEC MICRO TEXT -->
+      <p class="font-dm text-slate-300 text-base mb-5 leading-snug">
+        Det tar bara
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-solar-amber/10 border border-solar-amber/30 text-solar-amber font-700 text-sm mx-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          30 sekunder
+        </span>
+        — fyll i fälten för att se din
+        <strong class="text-white">uppskattade budget.</strong>
+      </p>
+
+      <!-- INPUT GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6" id="input-grid">
+
+        <!-- TAKYTA -->
+        <div class="flex flex-col gap-1.5">
+          <label for="area" class="font-syne font-700 text-sm text-slate-300">
+            Tillgänglig takyta (m²)
+            <span class="text-solar-amber ml-0.5">*</span>
+          </label>
+          <input
+            type="number"
+            id="area"
+            class="calc-input"
+            placeholder="t.ex. 80"
+            min="10"
+            max="500"
+            aria-label="Ange takyta i kvadratmeter"
+            inputmode="numeric"
+            required
+          />
+          <small class="text-xs text-navy-500">Minimum 10 m² krävs för beräkning</small>
+        </div>
+
+        <!-- POSTNUMMER -->
+        <div class="flex flex-col gap-1.5">
+          <label for="postcode" class="font-syne font-700 text-sm text-slate-300">
+            Postnummer
+            <span class="text-xs font-400 text-slate-500 ml-1">(valfritt)</span>
+          </label>
+          <input
+            type="text"
+            id="postcode"
+            class="calc-input"
+            placeholder="t.ex. 123 45"
+            maxlength="6"
+            inputmode="numeric"
+            aria-label="Ange ditt postnummer"
+          />
+          <small class="text-xs text-solar-green font-600">✓ Väljer automatiskt ditt elområde</small>
+        </div>
+
+        <!-- ELOMRÅDE -->
+        <div class="flex flex-col gap-1.5">
+          <label for="region" class="font-syne font-700 text-sm text-slate-300">
+            Elområde <span class="text-solar-amber ml-0.5">*</span>
+          </label>
+          <select id="region" class="calc-input" aria-label="Välj elområde" required>
+            <option value="1.40">SE1 — Luleå/Norrbotten (1,40 kr/kWh)</option>
+            <option value="1.45">SE2 — Sundsvall/Gävle (1,45 kr/kWh)</option>
+            <option value="1.60" selected>SE3 — Stockholm/Göteborg (1,60 kr/kWh)</option>
+            <option value="1.75">SE4 — Malmö/Skåne (1,75 kr/kWh)</option>
+          </select>
+        </div>
+
+        <!-- TAKRIKTNING -->
+        <div class="flex flex-col gap-1.5">
+          <label for="direction" class="font-syne font-700 text-sm text-slate-300">
+            Takriktning <span class="text-solar-amber ml-0.5">*</span>
+          </label>
+          <select id="direction" class="calc-input" aria-label="Välj takriktning" required>
+            <option value="1.00">Söder (100% — Optimalt)</option>
+            <option value="0.96">Sydväst / Sydost (96%)</option>
+            <option value="0.85">Väster / Öster (85%)</option>
+            <option value="0.70">Nordväst / Nordost (70%)</option>
+            <option value="0.60">Norr (60% — Ej rekommenderat)</option>
+          </select>
+        </div>
+
+        <!-- TAKLUTNING -->
+        <div class="flex flex-col gap-1.5">
+          <label for="slope" class="font-syne font-700 text-sm text-slate-300">
+            Taklutning <span class="text-solar-amber ml-0.5">*</span>
+          </label>
+          <select id="slope" class="calc-input" aria-label="Välj taklutning" required>
+            <option value="1.00">Standardtak 35–45° (100%)</option>
+            <option value="0.94">Brant tak &gt;45° (94%)</option>
+            <option value="0.92">Flackt tak 15–30° (92%)</option>
+            <option value="0.80">Platt tak 0–15° (80%)</option>
+          </select>
+        </div>
+
+        <!-- BATTERI TOGGLE -->
+        <div class="flex flex-col gap-2 justify-center bg-navy-700/50 border border-navy-600 rounded-xl p-4">
+          <span class="font-syne font-700 text-sm text-slate-300">Inkludera batterilagring?</span>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="includeBattery" class="toggle-input" />
+            <label for="includeBattery" class="toggle-label" aria-label="Inkludera batteri">
+              <span class="toggle-switch"></span>
+            </label>
+            <span class="text-xs text-slate-400 font-500">Nej / Ja</span>
+          </div>
+          <span class="text-xs text-solar-green font-700">✓ 48,5% SKATTEREDUKTION PÅ BATTERI (2026)</span>
+          <span class="text-xs text-slate-500">Batteri ökar självkonsumtion 32% → 65%</span>
+        </div>
+
+      </div>
+
+      <!-- 2026 INFO BANNER -->
+      <div class="flex items-start gap-3 bg-navy-700/60 border border-navy-600 rounded-xl p-4 mb-6">
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-800 uppercase tracking-wide bg-solar-amber text-black flex-shrink-0 mt-0.5">
+          Info 2026
+        </span>
+        <p class="text-sm text-slate-400 leading-relaxed m-0">
+          Den tidigare skattereduktionen på <strong class="text-slate-300">60 öre/kWh</strong> upphörde
+          1 januari 2026. Kalkylatorn prioriterar nu <strong class="text-solar-amber">egenkonsumtion</strong>,
+          vilket är den enskilt viktigaste faktorn för din solcellsaffär i år.
+        </p>
+      </div>
+
+    </div><!-- /form px-6 -->
+  </div><!-- /calc-card -->
+
+  <!-- ═══════════════════════════════════════
+       RESULTS SECTION
+  ════════════════════════════════════════ -->
+  <div id="results-section" class="mt-6">
+
+    <!-- RESULTS GRID -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-4">
+
+      <!-- PRODUKTION -->
+      <div class="res-card border-t-[3px] border-t-blue-500">
+        <svg class="w-6 h-6 mx-auto mb-2 text-blue-400" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        <span class="block text-[11px] font-700 uppercase tracking-wider text-slate-500 mb-1.5">Årlig Produktion</span>
+        <span id="resProduction" class="block font-syne font-800 text-2xl md:text-3xl text-blue-400 tabular-nums mb-1"
+              data-suffix=" kWh" data-raw="0">0 kWh</span>
+        <small class="text-[11px] text-slate-600">Baserat på svenska förhållanden</small>
+      </div>
+
+      <!-- BRUTTOPRIS -->
+      <div class="res-card border-t-[3px] border-t-slate-500">
+        <svg class="w-6 h-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+          <line x1="7" y1="7" x2="7.01" y2="7"/>
+        </svg>
+        <span class="block text-[11px] font-700 uppercase tracking-wider text-slate-500 mb-1.5">Pris före avdrag</span>
+        <span id="resGrossPrice" class="block font-syne font-800 text-2xl md:text-3xl text-slate-300 tabular-nums mb-1"
+              data-suffix=" kr" data-raw="0">0 kr</span>
+        <small class="text-[11px] text-slate-600">Inkl. moms &amp; installation</small>
+      </div>
+
+      <!-- GRÖN TEKNIK -->
+      <div class="res-card border-t-[3px] border-t-solar-green col-span-2 md:col-span-1"
+           style="background:linear-gradient(180deg,#0A1F12,#0D1520);">
+        <svg class="w-6 h-6 mx-auto mb-2 text-solar-green" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span class="block text-[11px] font-700 uppercase tracking-wider text-solar-green/80 mb-1.5">Grön Teknik 2026</span>
+        <span id="resGreenDeduction" class="block font-syne font-800 text-2xl md:text-3xl text-solar-green tabular-nums mb-1"
+              data-suffix=" kr" data-raw="0">0 kr</span>
+        <small class="text-[11px] text-solar-green/60">Dras av direkt på fakturan</small>
+      </div>
+
+      <!-- DIN INVESTERING — HERO CARD -->
+      <div class="res-card card-hero col-span-2 border-t-[3px] border-t-solar-amber">
+        <div class="flex flex-col items-center">
+          <svg class="w-6 h-6 mx-auto mb-2 text-solar-amber" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          <span class="block text-[11px] font-700 uppercase tracking-wider text-solar-amber/80 mb-1.5">Din Investering</span>
+          <span id="resNetPrice" class="block font-syne font-800 text-3xl md:text-[2.6rem] text-solar-amber tabular-nums mb-1"
+                data-suffix=" kr" data-raw="0">0 kr</span>
+          <small class="text-xs text-slate-500">Uppskattat slutpris efter avdrag</small>
+        </div>
+      </div>
+
+      <!-- ROI -->
+      <div class="res-card card-roi">
+        <svg class="w-6 h-6 mx-auto mb-2 text-solar-amber" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span class="block text-[11px] font-700 uppercase tracking-wider text-slate-500 mb-1.5">Återbetalningstid</span>
+        <span id="resRoi" class="block font-syne font-800 text-2xl md:text-3xl text-solar-amber tabular-nums mb-1"
+              data-suffix="" data-raw="0">—</span>
+        <small class="text-[11px] text-slate-600">Vid normal elprisutveckling</small>
+      </div>
+
+      <!-- 30-ÅRS BESPARING — BIGGEST NUMBER -->
+      <div class="res-card border-t-[3px] border-t-solar-green"
+           style="background:linear-gradient(180deg,#0A1F12,#0D1520); box-shadow:0 0 30px rgba(16,185,129,0.15);">
+        <svg class="w-6 h-6 mx-auto mb-2 text-solar-green" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6"  y1="20" x2="6"  y2="14"/>
+        </svg>
+        <span class="block text-[11px] font-700 uppercase tracking-wider text-solar-green/80 mb-1.5">Besparing 30 år</span>
+        <span id="resLifetimeSavings" class="block font-syne font-800 text-2xl md:text-3xl text-solar-green tabular-nums mb-1"
+              data-suffix=" kr" data-raw="0">0 kr</span>
+        <small class="text-[11px] text-solar-green/60">Total besparing över tid</small>
+      </div>
+
+    </div><!-- /results-grid -->
+
+    <!-- ═══════════════════════════════════════
+         CPA DIV — THE MONEY MOMENT
+         Visas direkt efter resultaten
+    ════════════════════════════════════════ -->
+    <div id="cpa-block" class="cpa-section" style="display:none">
+
+      <!-- URGENCY BAR (live counter) -->
+      <div class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-lg mb-5
+                  bg-solar-amber/10 border border-solar-amber/30 text-sm font-600 text-solar-amber">
+        <span class="relative flex w-2.5 h-2.5 flex-shrink-0">
+          <span class="ping-dot absolute inline-flex h-full w-full rounded-full bg-solar-amber opacity-75"></span>
+          <span class="relative inline-flex rounded-full w-2.5 h-2.5 bg-solar-amber"></span>
+        </span>
+        <strong id="viewer-count">24</strong>&nbsp;husägare beräknar pris just nu i ditt område
+      </div>
+
+      <!-- HEADLINE -->
+      <h3 class="font-syne font-800 text-white text-2xl sm:text-3xl leading-tight mb-3 relative z-10">
+        Dina siffror ser fantastiska ut.<br/>
+        <span class="text-solar-amber">Nu gör vi dem officiella.</span>
+      </h3>
+
+      <!-- SUBTEXT with loss aversion -->
+      <p class="font-dm text-slate-400 text-sm sm:text-base leading-relaxed mb-2 max-w-lg relative z-10">
+        Kalkylatorn visade potentialen i ditt tak. För ett <strong class="text-white">verkligt garanterat pris</strong>,
+        låt en certifierad expert kontrollera lutning och skuggning.
+      </p>
+
+      <!-- LOSS AVERSION TRIGGER -->
+      <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/25
+                  text-sm text-red-400 font-600 mb-6 relative z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        Varje månad utan solceller kostar dig ca <span id="monthly-loss" class="text-red-300 font-800 mx-1">975 kr</span>
+        mer i elräkning.
+      </div>
+
+      <!-- MICRO-SÍ GATE — Klaric technique -->
+      <div id="micro-si-gate" class="relative z-10 mb-6">
+        <p class="text-sm font-700 text-slate-300 mb-3">Är du husägare?</p>
+        <div class="flex gap-3">
+          <button id="btn-yes"
+                  class="flex-1 py-3 px-4 rounded-xl font-syne font-700 text-sm
+                         bg-solar-amber text-black
+                         hover:bg-solar-amber-light active:scale-[0.97]
+                         transition-all duration-150 shadow-amber-glow">
+            ✓ Ja, jag äger min villa
+          </button>
+          <button id="btn-no"
+                  class="flex-1 py-3 px-4 rounded-xl font-syne font-700 text-sm
+                         bg-navy-700 border border-navy-600 text-slate-400
+                         hover:border-navy-500 active:scale-[0.97]
+                         transition-all duration-150">
+            Nej
+          </button>
+        </div>
+      </div>
+
+      <!-- CTA BLOCK (shown after micro-yes) -->
+      <div id="cta-reveal" class="relative z-10" style="display:none">
+
+        <a
+          href="TU_LINK_DE_ADTRACTION"
+          rel="sponsored noopener noreferrer"
+          class="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-xl
+                 font-syne font-800 text-lg text-black
+                 bg-amber-gradient shadow-amber-glow-lg cta-pulse
+                 hover:scale-[1.02] active:scale-[0.98]
+                 transition-transform duration-150 mb-4"
+          aria-label="Hämta ditt exakta pris via Hemsol"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          JAG VILL HA MITT EXAKTA PRIS →
+        </a>
+
+        <!-- PARTNER ROW -->
+        <div class="flex items-center justify-center gap-2 text-sm text-slate-500 mb-5 font-500">
+          Jämför installatörer <strong class="text-slate-300">gratis</strong> i tryggt samarbete med
+          <img
+            src="https://villaklok.se/wp-content/uploads/2026/02/hemsol.webp"
+            alt="Hemsol — certifierad solcellsinstallatör"
+            loading="lazy"
+            class="h-5 object-contain opacity-90 ml-1"
+          />
+        </div>
+
+        <!-- TRUST BADGES -->
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3">
+          <div class="flex items-center gap-2 text-sm text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span class="font-600 text-slate-300">Endast husägare</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Ej bindande</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Svar inom 24h</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>100% Gratis</span>
+          </div>
+        </div>
+      </div><!-- /cta-reveal -->
+
+    </div><!-- /cpa-block -->
+
+  </div><!-- /results-section -->
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CALCULATOR JAVASCRIPT — FIXED + ENHANCED
+     Fixes: direction mult, slope mult, region → electricity price + sun hours
+     New: count-up animations, progress bar, micro-sí gate, monthly loss calc
+════════════════════════════════════════════════════════ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── DOM REFS ─────────────────────────────── */
+  const area      = document.getElementById('area');
+  const postcode  = document.getElementById('postcode');
+  const region    = document.getElementById('region');
+  const direction = document.getElementById('direction');
+  const slope     = document.getElementById('slope');
+  const battery   = document.getElementById('includeBattery');
+
+  const out = {
+    production:  document.getElementById('resProduction'),
+    gross:       document.getElementById('resGrossPrice'),
+    deduction:   document.getElementById('resGreenDeduction'),
+    net:         document.getElementById('resNetPrice'),
+    roi:         document.getElementById('resRoi'),
+    lifetime:    document.getElementById('resLifetimeSavings'),
+    monthlyLoss: document.getElementById('monthly-loss'),
+  };
+
+  const progressBar   = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const cpaBlock      = document.getElementById('cpa-block');
+  const viewerCount   = document.getElementById('viewer-count');
+  const microGate     = document.getElementById('micro-si-gate');
+  const ctaReveal     = document.getElementById('cta-reveal');
+  const btnYes        = document.getElementById('btn-yes');
+  const btnNo         = document.getElementById('btn-no');
+
+  /* ── CONSTANTS 2026 (mantiene lógica del original, con fixes) ─ */
+  const C = {
+    panelPowerPerM2: 0.200,   // 200 W/m²
+    pricePerKw:      14500,   // SEK/kW instalado
+    batteryCost:     45000,   // SEK batería 10kWh
+    energyPriceSell: 0.50,    // kr/kWh sin 60-öre
+    selfUseBase:     0.32,    // sin batería
+    selfUseBattery:  0.65,    // con batería
+    deductionSolar:  0.1455,  // Grön Teknik solar
+    deductionBatt:   0.485,   // Grön Teknik batería
+    maxDeduction:    100000,  // kr máximo (pareja)
+    inflation:       0.02,    // 2% anual
+  };
+
+  /* FIX: Sun hours by region (electricity price key) */
+  const SUN_HOURS = { 1.40: 800, 1.45: 900, 1.60: 950, 1.75: 1050 };
+
+  /* ── RANDOM VIEWER COUNT ──────────────────── */
+  if (viewerCount) {
+    viewerCount.textContent = String(Math.floor(Math.random() * (38 - 14 + 1)) + 14);
+  }
+
+  /* ── POSTCODE → REGION AUTO-SELECT ──────── */
+  function postcodeToZone(code) {
+    const n = parseInt(code.replace(/\D/g, '').substring(0, 2));
+    if (isNaN(n)) return null;
+    if (n >= 95) return '1.40';
+    if (n >= 80) return '1.45';
+    if ((n >= 20 && n <= 39) || (n >= 27 && n <= 29)) return '1.75';
+    return '1.60';
+  }
+
+  postcode?.addEventListener('input', (e) => {
+    let v = e.target.value.replace(/\s/g,'').replace(/\D/g,'');
+    if (v.length > 3) v = v.slice(0,3) + ' ' + v.slice(3,5);
+    e.target.value = v;
+    if (v.replace(/\s/g,'').length >= 2) {
+      const z = postcodeToZone(v);
+      if (z && region) { region.value = z; calculate(); }
+    }
+  });
+
+  /* ── PROGRESS BAR ─────────────────────────── */
+  function updateProgress() {
+    const areaVal = parseFloat(area?.value || '0');
+    let score = 0;
+    if (areaVal >= 10)                                  score += 40;
+    if (direction?.value && direction.value !== '1.00') score += 20;
+    if (slope?.value     && slope.value     !== '1.00') score += 20;
+    if (battery?.checked)                               score += 20;
+    // Area filled is the main trigger
+    if (areaVal >= 10) score = Math.max(score, 40);
+    if (areaVal >= 50) score = Math.max(score, 60);
+
+    if (progressBar)  progressBar.style.width  = score + '%';
+    if (progressLabel) {
+      if (score === 0)        progressLabel.textContent = 'Fyll i takyta för att börja';
+      else if (score < 60)    progressLabel.textContent = 'Bra start — justera detaljer';
+      else if (score < 100)   progressLabel.textContent = 'Nästan klar — granska dina val';
+      else                    progressLabel.textContent = '✓ Fullständig beräkning!';
+      progressLabel.style.color = score >= 60 ? '#F59E0B' : '#64748B';
+    }
+  }
+
+  /* ── COUNT-UP ANIMATION ────────────────────── */
+  function countUp(el, endVal, suffix, duration = 1100) {
+    if (!el) return;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const elapsed  = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out-cubic
+      const eased    = 1 - Math.pow(1 - progress, 3);
+      const current  = Math.round(endVal * eased);
+      el.textContent = formatNum(current) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ── NUMBER FORMAT (Swedish sv-SE style) ─── */
+  function formatNum(n) {
+    return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
+  }
+
+  /* ── MAIN CALCULATION ─────────────────────── */
+  function calculate() {
+    if (!area) return;
+
+    const areaVal   = parseFloat(area.value) || 0;
+    // FIX: parse electricity price directly from region value
+    const elPrice   = parseFloat(region?.value   || '1.60');
+    // FIX: parse direction multiplier directly (was always 1.0 bug)
+    const dirMult   = parseFloat(direction?.value || '1.00');
+    // FIX: parse slope multiplier directly (was never used bug)
+    const slopeMult = parseFloat(slope?.value     || '1.00');
+    const hasBatt   = battery?.checked || false;
+
+    updateProgress();
+
+    if (areaVal < 10) {
+      setZero(); return;
+    }
+
+    /* — 1. Production — */
+    const usable     = areaVal * 0.80;
+    const kWp        = usable * C.panelPowerPerM2;
+    const sunHrs     = SUN_HOURS[elPrice] || 950;  // FIX: proper sun hours by region
+    const annualProd = kWp * sunHrs * dirMult * slopeMult;  // FIX: direction + slope now used
+
+    /* — 2. Investment — */
+    let pricePerKw = C.pricePerKw;
+    if (kWp > 10) pricePerKw *= 0.90;
+    if (kWp > 20) pricePerKw *= 0.85;
+    const solarGross  = kWp * pricePerKw;
+    const battGross   = hasBatt ? C.batteryCost : 0;
+    const totalGross  = solarGross + battGross;
+
+    /* — 3. Grön Teknik deduction — */
+    let deduction = solarGross * C.deductionSolar + battGross * C.deductionBatt;
+    if (deduction > C.maxDeduction) deduction = C.maxDeduction;
+    const netInvestment = totalGross - deduction;
+
+    /* — 4. Annual savings — */
+    const selfRate = hasBatt ? C.selfUseBattery : C.selfUseBase;
+    const selfKwh  = annualProd * selfRate;
+    const soldKwh  = annualProd * (1 - selfRate);
+    // FIX: use actual region electricity price instead of hardcoded 1.60
+    const annualBenefit = selfKwh * elPrice + soldKwh * C.energyPriceSell;
+
+    /* — 5. ROI & Lifetime — */
+    const roiYears = annualBenefit > 0 ? netInvestment / annualBenefit : 0;
+
+    let lifetime = 0, benefit = annualBenefit;
+    for (let i = 0; i < 30; i++) {
+      lifetime += benefit;
+      benefit  *= (1 + C.inflation);
+    }
+
+    /* — 6. Monthly loss (loss aversion trigger) — */
+    const monthlyLoss = Math.round(annualBenefit / 12);
+
+    /* — 7. Update UI with count-up — */
+    const was = parseInt(out.net?.dataset?.raw || '0');
+    const changed = Math.abs(Math.round(netInvestment) - was) > 100;
+
+    countUp(out.production, annualProd,   ' kWh');
+    countUp(out.gross,      totalGross,   ' kr');
+
+    if (out.deduction) {
+      const ded = Math.round(deduction);
+      countUp(out.deduction, ded, ' kr');
+      // prefix handled by JS: add minus after count-up
+      setTimeout(() => {
+        if (out.deduction && ded > 0) {
+          const raw = out.deduction.textContent;
+          if (!raw.startsWith('-')) out.deduction.textContent = '-' + raw;
+        }
+      }, 1150);
+    }
+
+    countUp(out.net,      netInvestment,  ' kr');
+    countUp(out.lifetime, lifetime,       ' kr');
+
+    if (out.net)      out.net.dataset.raw = String(Math.round(netInvestment));
+
+    if (roiYears > 0 && roiYears < 50) {
+      const roiStr = (Math.round(roiYears * 10) / 10).toString().replace('.', ',') + ' År';
+      if (out.roi) out.roi.textContent = roiStr;
+    } else {
+      if (out.roi) out.roi.textContent = '—';
+    }
+
+    if (out.monthlyLoss) {
+      out.monthlyLoss.textContent = formatNum(monthlyLoss) + ' kr';
+    }
+
+    /* — 8. Show CPA block (reveal only, NO forced scroll) — */
+    if (cpaBlock && cpaBlock.style.display === 'none') {
+      cpaBlock.style.display = 'block';
+      cpaBlock.style.animation = 'fadeUp 0.55s ease-out both';
+      // Show floating nudge instead of scrollIntoView
+      showResultsNudge();
+    }
+
+    console.log('═══ VillaKlok Calc 2026 ═══');
+    console.log(`📐 ${areaVal}m² | ${kWp.toFixed(2)}kWp | ${sunHrs}h | dir:${dirMult} slope:${slopeMult}`);
+    console.log(`☀️ Prod: ${Math.round(annualProd)} kWh | Self:${(selfRate*100).toFixed(0)}%`);
+    console.log(`💰 Gross:${formatNum(totalGross)} | Ded:-${formatNum(deduction)} | Net:${formatNum(netInvestment)} kr`);
+    console.log(`📈 Annual:${formatNum(annualBenefit)} kr | ROI:${roiYears.toFixed(1)}yr | 30yr:${formatNum(lifetime)} kr`);
+    console.log('══════════════════════════');
+  }
+
+  /* ── RESULTS NUDGE TOAST (Klaric: guide without forcing) ── */
+  function showResultsNudge() {
+    // Only show on mobile/tablet where CPA is below fold
+    if (window.innerWidth >= 1024) return;
+    const existing = document.getElementById('results-nudge');
+    if (existing) return; // already shown
+
+    const nudge = document.createElement('div');
+    nudge.id = 'results-nudge';
+    nudge.innerHTML = `
+      <div style="
+        position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+        z-index:200; pointer-events:auto;
+        background:linear-gradient(135deg,#0A1628,#0C1F12);
+        border:1.5px solid rgba(245,158,11,0.5);
+        border-radius:50px; padding:11px 20px 11px 16px;
+        display:flex; align-items:center; gap:10px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(245,158,11,0.2);
+        animation: fadeUp 0.4s ease-out both;
+        cursor:pointer; white-space:nowrap;
+        font-family:'DM Sans',sans-serif;
+      ">
+        <span style="
+          width:28px; height:28px; border-radius:50%;
+          background:linear-gradient(135deg,#F59E0B,#F97316);
+          display:flex; align-items:center; justify-content:center;
+          flex-shrink:0; font-size:14px;
+        ">⚡</span>
+        <span style="font-size:0.82rem; font-weight:600; color:#F1F5F9; line-height:1.3;">
+          Dina siffror är klara
+          <span style="display:block; font-size:0.72rem; color:#94A3B8; font-weight:400;">Tryck för att se ditt pris →</span>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+    `;
+    nudge.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:200;pointer-events:none;';
+    document.body.appendChild(nudge);
+
+    // Click → smooth scroll to CPA block
+    nudge.addEventListener('click', () => {
+      cpaBlock?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      fadeOutNudge();
+    });
+
+    // Auto-dismiss after 6s
+    setTimeout(fadeOutNudge, 6000);
+
+    // Hide when user scrolls near CPA
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) fadeOutNudge();
+    }, { threshold: 0.3 });
+    if (cpaBlock) observer.observe(cpaBlock);
+
+    function fadeOutNudge() {
+      if (nudge.parentNode) {
+        nudge.style.transition = 'opacity 0.35s, transform 0.35s';
+        nudge.style.opacity = '0';
+        nudge.style.transform = 'translateY(12px)';
+        setTimeout(() => nudge.remove(), 380);
+      }
+      observer.disconnect();
+    }
+  }
+
+  function setZero() {
+    [out.production, out.gross, out.deduction, out.net, out.lifetime].forEach(el => {
+      if (el) el.textContent = '0' + (el.dataset.suffix || '');
+    });
+    if (out.roi)  out.roi.textContent = '—';
+  }
+
+  /* ── MICRO-SÍ GATE ────────────────────────── */
+  btnYes?.addEventListener('click', () => {
+    if (microGate) microGate.style.display = 'none';
+    if (ctaReveal) {
+      ctaReveal.style.display = 'block';
+      ctaReveal.style.animation = 'fadeUp 0.45s ease-out both';
+    }
+  });
+
+  btnNo?.addEventListener('click', () => {
+    if (cpaBlock) {
+      cpaBlock.style.opacity = '0.4';
+      cpaBlock.style.transform = 'scale(0.98)';
+      cpaBlock.style.transition = '0.3s';
+    }
+    if (microGate) {
+      microGate.innerHTML = `<p class="text-sm text-slate-500 italic">
+        Om du köper eller planerar att köpa villa kan du fortfarande använda kalkylatorn för att förbereda din investering.
+      </p>`;
+    }
+  });
+
+  /* ── EVENT LISTENERS ─────────────────────── */
+  [area, region, direction, slope, battery].forEach(el => {
+    if (el) {
+      el.addEventListener('input',  calculate);
+      el.addEventListener('change', calculate);
+    }
+  });
+
+  /* ── AUTO-FOCUS on desktop ──────────────── */
+  if (window.innerWidth >= 768 && area) {
+    setTimeout(() => area.focus(), 700);
+  }
+
+  /* ── INITIAL STATE ─────────────────────── */
+  if (area?.value) calculate();
+  else setZero();
+
+});
+</script>

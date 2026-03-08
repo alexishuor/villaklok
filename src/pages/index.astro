@@ -1,0 +1,389 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const zones = [
+  {
+    id: 'SE4', name: 'Skåne & Blekinge', label: 'Bäst ROI i Sverige',
+    desc: 'Flest soltimmar — kortast återbetalningstid',
+    icon: '☀️', badge: '~7 år', badgeLabel: 'återbetalning',
+    glow: 'rgba(245,158,11,0.20)', border: 'rgba(245,158,11,0.35)', accent: '#F59E0B',
+    cities: ['Malmö','Helsingborg','Lund','Kristianstad','Ystad','Trelleborg','Landskrona','Hässleholm','Ängelholm']
+  },
+  {
+    id: 'SE3', name: 'Stockholm & Mälardalen', label: 'Störst marknad',
+    desc: 'Höga elpriser — snabb lönsamhet',
+    icon: '🏙️', badge: '~9 år', badgeLabel: 'återbetalning',
+    glow: 'rgba(249,115,22,0.15)', border: 'rgba(249,115,22,0.30)', accent: '#F97316',
+    cities: ['Stockholm','Göteborg','Uppsala','Västerås','Örebro','Linköping','Norrköping','Eskilstuna','Södertälje','Nacka','Täby']
+  },
+  {
+    id: 'SE2', name: 'Dalarna & Norrland Syd', label: 'Mellanzon',
+    desc: 'Balans mellan sol och elpris',
+    icon: '🌲', badge: '~10 år', badgeLabel: 'återbetalning',
+    glow: 'rgba(6,182,212,0.12)', border: 'rgba(6,182,212,0.25)', accent: '#06B6D4',
+    cities: ['Sundsvall','Gävle','Falun','Borlänge','Östersund','Härnösand','Hudiksvall','Sandviken']
+  },
+  {
+    id: 'SE1', name: 'Norra Sverige', label: 'Lång sommar',
+    desc: 'Intensiv sommarproduktion',
+    icon: '🔵', badge: '~11 år', badgeLabel: 'återbetalning',
+    glow: 'rgba(99,102,241,0.12)', border: 'rgba(99,102,241,0.25)', accent: '#818CF8',
+    cities: ['Umeå','Luleå','Skellefteå','Piteå','Örnsköldsvik','Boden','Kiruna']
+  }
+];
+---
+
+<BaseLayout
+  title="Solceller Villa Sverige 2026 | Kalkylator, Pris och Besparing — Villaklok"
+  description="Beräkna om solceller lönar sig för din villa. Gratis solcellskalkylator med Grön Teknik-avdrag, lokala elpriser och 30-årig besparingsprognos. Välj din stad."
+>
+  <Header page="home" />
+  <main>
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #060B16 0%, #0A1628 60%, #0D1E0A 100%);">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] opacity-[0.12]" style="background: radial-gradient(circle at 70% 30%, #F59E0B, transparent 65%)"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-[0.08]" style="background: radial-gradient(circle at 30% 80%, #10B981, transparent 65%)"></div>
+        <div class="absolute inset-0 opacity-[0.025]" style="background-image: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 48px 48px;"></div>
+      </div>
+      <div class="relative z-10 max-w-6xl mx-auto px-5 py-16 md:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full bg-navy-800 border border-navy-600 text-[11px] font-600 text-slate-400 tracking-widest uppercase home-fade-up" style="animation-delay:0.05s">
+              <span class="w-2 h-2 rounded-full bg-solar-green flex-shrink-0" style="box-shadow:0 0 8px #10B981"></span>
+              Grön Teknik-avdrag 2026 — Nya regler gäller
+            </div>
+            <h1 class="font-dm font-500 text-slate-500 text-[0.75rem] sm:text-[0.82rem] tracking-[0.13em] uppercase leading-none mb-4 home-fade-up" style="animation-delay:0.1s">
+              Solceller villa Sverige — beräkna pris och besparing 2026
+            </h1>
+            <p class="font-syne font-800 text-white leading-[1.07] mb-5 text-[2.3rem] sm:text-[3rem] lg:text-[3.4rem] home-fade-up" style="animation-delay:0.15s">
+              Din villa<br/>
+              <span class="text-solar-amber">betalar tillbaka.</span><br/>
+              <span style="font-weight:300; color: #94A3B8; font-size: 0.62em; line-height:1.8; display:block;">Varje dag utan solceller kostar extra.</span>
+            </p>
+            <p class="font-dm text-slate-400 text-[1rem] sm:text-[1.1rem] leading-relaxed mb-7 max-w-[500px] home-fade-up" style="animation-delay:0.22s">
+              Se exakt hur mycket <strong class="text-white">du sparar med solceller på tak</strong> — med ditt postnummer, ditt tak och de nya reglerna för 2026. Gratis. Inga mejladresser.
+            </p>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-7 home-fade-up" style="animation-delay:0.3s">
+              <a href="/solcellskalkylator" class="inline-flex items-center gap-3 font-syne font-800 text-[1rem] text-black px-7 py-4 rounded-xl shadow-amber-glow cta-pulse hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150" style="background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Beräkna min besparing
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <span class="inline-flex items-center gap-1.5 text-[0.8rem] text-slate-500 font-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-solar-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                100% gratis och ej bindande
+              </span>
+            </div>
+            <div class="flex flex-wrap gap-x-5 gap-y-1.5 home-fade-up" style="animation-delay:0.38s">
+              <span class="flex items-center gap-1.5 text-[11px] text-slate-600 font-500"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Data från Skatteverket och Svenska Kraftnät</span>
+              <span class="flex items-center gap-1.5 text-[11px] text-slate-600 font-500"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Grön Teknik inräknat</span>
+              <span class="flex items-center gap-1.5 text-[11px] text-slate-600 font-500"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-solar-green flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Uppdaterad jan 2026</span>
+            </div>
+          </div>
+          <!-- RIGHT: Hero image -->
+          <div class="relative home-fade-up hidden lg:block" style="animation-delay:0.25s">
+            <div class="relative rounded-2xl overflow-hidden" style="box-shadow: 0 0 80px rgba(245,158,11,0.15), 0 24px 60px rgba(0,0,0,0.5);">
+              <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=80" alt="Solceller på villatak Sverige — solpaneler monterade på ett hus" class="w-full h-[420px] object-cover" loading="eager" width="900" height="420" />
+              <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(6,11,22,0.85) 0%, rgba(6,11,22,0.2) 50%, transparent 100%)"></div>
+              <div class="absolute bottom-5 left-5 right-5">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex-1 rounded-xl p-3.5" style="background: rgba(10,22,40,0.92); border: 1px solid rgba(245,158,11,0.3); backdrop-filter: blur(12px);">
+                    <div class="text-[10px] text-slate-500 uppercase tracking-wider font-600 mb-0.5">Genomsnittlig besparing</div>
+                    <div class="font-syne font-800 text-solar-amber text-xl leading-none">18 500 kr</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">per år efter avdrag</div>
+                  </div>
+                  <div class="flex-1 rounded-xl p-3.5" style="background: rgba(10,22,40,0.92); border: 1px solid rgba(16,185,129,0.3); backdrop-filter: blur(12px);">
+                    <div class="text-[10px] text-slate-500 uppercase tracking-wider font-600 mb-0.5">Återbetalningstid</div>
+                    <div class="font-syne font-800 text-solar-green text-xl leading-none">7–11 år</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">sedan 30 år vinst</div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute top-4 right-4 px-2.5 py-1.5 rounded-lg text-[11px] font-700 font-syne text-black" style="background: linear-gradient(135deg,#F59E0B,#F97316);">2026 ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <section class="border-y border-navy-700/50" style="background: #0A1628;">
+      <div class="max-w-6xl mx-auto px-5 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div class="text-center"><div class="font-syne font-800 text-solar-amber text-2xl sm:text-3xl leading-none mb-1">14,55%</div><div class="font-dm font-600 text-white text-[0.8rem] mb-0.5">Grön Teknik-avdrag</div><div class="text-[11px] text-slate-600">på solpaneler 2026</div></div>
+          <div class="text-center"><div class="font-syne font-800 text-solar-amber text-2xl sm:text-3xl leading-none mb-1">7–11 år</div><div class="font-dm font-600 text-white text-[0.8rem] mb-0.5">Återbetalningstid</div><div class="text-[11px] text-slate-600">beroende på elzon</div></div>
+          <div class="text-center"><div class="font-syne font-800 text-solar-amber text-2xl sm:text-3xl leading-none mb-1">480 000+</div><div class="font-dm font-600 text-white text-[0.8rem] mb-0.5">Villor med solceller</div><div class="text-[11px] text-slate-600">i Sverige 2025</div></div>
+          <div class="text-center"><div class="font-syne font-800 text-solar-amber text-2xl sm:text-3xl leading-none mb-1">30 år</div><div class="font-dm font-600 text-white text-[0.8rem] mb-0.5">Garanterad livslängd</div><div class="text-[11px] text-slate-600">på moderna paneler</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM/SOLUTION SECTION -->
+    <section id="om-solceller" class="py-16 md:py-20 px-5" style="background: #060B16;">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="relative order-2 lg:order-1">
+            <div class="relative rounded-2xl overflow-hidden" style="box-shadow: 0 0 60px rgba(0,0,0,0.5);">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80" alt="Solceller på hustak villa — solpaneler monterade på ett rött hus" class="w-full h-[380px] lg:h-[440px] object-cover" loading="lazy" width="900" height="440" />
+              <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(245,80,30,0.1) 0%, rgba(6,11,22,0.5) 100%)"></div>
+              <div class="absolute top-5 left-5 right-5">
+                <div class="inline-flex items-start gap-2.5 px-4 py-3 rounded-xl" style="background: rgba(6,11,22,0.88); border: 1px solid rgba(239,68,68,0.35); backdrop-filter: blur(10px);">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <div>
+                    <div class="text-[11px] font-700 font-syne text-red-400 uppercase tracking-wider mb-0.5">Kostnaden av att vänta</div>
+                    <div class="text-[13px] text-slate-300 font-dm leading-snug">Varje månad utan solceller kostar en typisk villa <strong class="text-red-400">~975 kr mer</strong> i onödig elkostnad.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2">
+            <span class="inline-block text-[11px] font-700 uppercase tracking-[2px] text-slate-600 mb-4">Varför solceller 2026?</span>
+            <h2 class="font-syne font-800 text-white text-2xl sm:text-3xl lg:text-[2.1rem] leading-[1.15] mb-5">
+              Elpriserna stiger.<br/><span class="text-solar-amber">Din villa kan tjäna pengar istället.</span>
+            </h2>
+            <p class="font-dm text-slate-400 text-[0.95rem] leading-relaxed mb-6">
+              Sedan 2022 har elpriset i Sverige varierat kraftigt — men trenden är tydlig. Varje kWh du producerar själv är en kWh du <strong class="text-white">inte betalar för</strong>, plus att du kan <strong class="text-white">sälja överskott till nätet</strong>.
+            </p>
+            <ul class="space-y-3 mb-7">
+              <li class="flex items-start gap-3"><span class="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><span class="font-dm font-700 text-white text-[0.88rem]">14,55% Grön Teknik-avdrag</span><span class="font-dm text-slate-500 text-[0.82rem] ml-1.5">Direkt skattereduktion på installationskostnaden</span></div></li>
+              <li class="flex items-start gap-3"><span class="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><span class="font-dm font-700 text-white text-[0.88rem]">Sälja överskottsel</span><span class="font-dm text-slate-500 text-[0.82rem] ml-1.5">50 öre/kWh tillbaka från elnätet</span></div></li>
+              <li class="flex items-start gap-3"><span class="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><span class="font-dm font-700 text-white text-[0.88rem]">Batteri: 48,5% avdrag</span><span class="font-dm text-slate-500 text-[0.82rem] ml-1.5">Om du kombinerar med batterilagring</span></div></li>
+              <li class="flex items-start gap-3"><span class="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><span class="font-dm font-700 text-white text-[0.88rem]">Fastighetsvärde +5–8%</span><span class="font-dm text-slate-500 text-[0.82rem] ml-1.5">Solceller ökar villans marknadsvärde</span></div></li>
+            </ul>
+            <a href="/solcellskalkylator" class="inline-flex items-center gap-2 font-syne font-700 text-[0.9rem] text-black px-6 py-3.5 rounded-xl hover:scale-[1.02] transition-transform duration-150" style="background: linear-gradient(135deg, #F59E0B, #F97316); box-shadow: 0 0 24px rgba(245,158,11,0.25);">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Se min kalkyl gratis
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="py-14 md:py-18 px-5" style="background: #0A1628; border-top: 1px solid rgba(30,45,66,0.7);">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-10">
+          <span class="text-[11px] font-700 uppercase tracking-[2px] text-slate-600 block mb-3">Så enkelt fungerar det</span>
+          <h2 class="font-syne font-800 text-white text-2xl sm:text-[1.9rem] leading-tight">Från takyta till besparing — <span class="text-solar-amber">på 30 sekunder</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="flex flex-col items-center text-center p-6 rounded-2xl transition-transform duration-200 hover:-translate-y-1" style="background: #060B16; border: 1px solid rgba(30,45,66,0.8);">
+            <div class="w-[52px] h-[52px] rounded-full flex items-center justify-center mb-4" style="background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(249,115,22,0.08)); border: 1.5px solid rgba(245,158,11,0.3);"><span class="font-syne font-800 text-solar-amber text-sm">01</span></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-solar-amber mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <h3 class="font-syne font-700 text-white text-[1rem] mb-2">Ange ditt tak</h3>
+            <p class="font-dm text-slate-500 text-[0.85rem] leading-relaxed">Fyll i takyta, riktning och lutning. Tar 20 sekunder.</p>
+          </div>
+          <div class="flex flex-col items-center text-center p-6 rounded-2xl transition-transform duration-200 hover:-translate-y-1" style="background: #060B16; border: 1px solid rgba(30,45,66,0.8);">
+            <div class="w-[52px] h-[52px] rounded-full flex items-center justify-center mb-4" style="background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(249,115,22,0.08)); border: 1.5px solid rgba(245,158,11,0.3);"><span class="font-syne font-800 text-solar-amber text-sm">02</span></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-solar-amber mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <h3 class="font-syne font-700 text-white text-[1rem] mb-2">Se din personliga kalkyl</h3>
+            <p class="font-dm text-slate-500 text-[0.85rem] leading-relaxed">Pris, avdrag, ROI och 30-årig besparing — direkt, utan registrering.</p>
+          </div>
+          <div class="flex flex-col items-center text-center p-6 rounded-2xl transition-transform duration-200 hover:-translate-y-1" style="background: #060B16; border: 1px solid rgba(30,45,66,0.8);">
+            <div class="w-[52px] h-[52px] rounded-full flex items-center justify-center mb-4" style="background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(249,115,22,0.08)); border: 1.5px solid rgba(245,158,11,0.3);"><span class="font-syne font-800 text-solar-amber text-sm">03</span></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-solar-amber mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <h3 class="font-syne font-700 text-white text-[1rem] mb-2">Jämför gratis offerter</h3>
+            <p class="font-dm text-slate-500 text-[0.85rem] leading-relaxed">Om siffrorna ser bra ut — begär gratis jämförelse via vår partner Hemsol.</p>
+          </div>
+        </div>
+        <div class="text-center mt-8">
+          <a href="/solcellskalkylator" class="inline-flex items-center gap-2.5 font-syne font-700 text-[0.95rem] text-black px-8 py-4 rounded-xl cta-pulse hover:scale-[1.02] transition-transform duration-150" style="background: linear-gradient(135deg, #F59E0B, #F97316); box-shadow: 0 0 32px rgba(245,158,11,0.28);">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Starta min beräkning nu
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- MUNICIPALITY CLUSTERS -->
+    <section id="solceller-per-stad" class="py-16 md:py-20 px-5" style="background: #060B16; border-top: 1px solid rgba(30,45,66,0.5);">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <span class="text-[11px] font-700 uppercase tracking-[2px] text-slate-600 block mb-2">Välj din stad</span>
+            <h2 class="font-syne font-800 text-white text-2xl sm:text-3xl leading-tight">Solceller per elzon och stad</h2>
+            <p class="font-dm text-slate-500 text-[0.88rem] mt-2 max-w-[480px]">ROI varierar med din elzon. Klicka på din stad för lokal <strong class="text-slate-400">solcellskalkyl</strong> med rätt elpris och soltimmar.</p>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-[11px] text-slate-600 font-500">Bäst ROI</span>
+            <span class="text-[11px] font-700 px-2 py-1 rounded" style="color:#F59E0B;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);">SE4</span>
+            <span class="text-[11px] font-700 px-2 py-1 rounded" style="color:#F97316;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);">SE3</span>
+            <span class="text-[11px] font-700 px-2 py-1 rounded" style="color:#06B6D4;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);">SE2</span>
+            <span class="text-[11px] font-700 px-2 py-1 rounded" style="color:#818CF8;background:rgba(129,140,248,0.1);border:1px solid rgba(129,140,248,0.25);">SE1</span>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5">
+          {zones.map(zone => (
+            <div class="rounded-2xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={}>
+              <div class="px-5 py-4" style={}>
+                <div class="flex items-start justify-between gap-2 mb-1.5">
+                  <span class="text-lg" aria-hidden="true">{zone.icon}</span>
+                  <span class="text-[10px] font-800 font-syne px-2 py-0.5 rounded" style={}>{zone.id}</span>
+                </div>
+                <h3 class="font-syne font-700 text-white text-[0.92rem] leading-tight mb-0.5">{zone.name}</h3>
+                <p class="text-[11px] text-slate-600 leading-snug">{zone.desc}</p>
+                <div class="mt-3 flex items-center gap-1.5">
+                  <span class="font-syne font-800 text-[1.1rem]" style={}>{zone.badge}</span>
+                  <span class="text-[11px] text-slate-600">{zone.badgeLabel}</span>
+                </div>
+              </div>
+              <div class="px-4 py-4">
+                <div class="flex flex-wrap gap-1.5">
+                  {zone.cities.map(city => (
+                    <a href={} class="city-chip inline-block px-2.5 py-1 rounded-md font-dm font-500 text-[0.72rem] transition-all duration-150" style="color:#94A3B8; background:#060B16; border:1px solid rgba(30,45,66,0.8);" data-accent={zone.accent}>
+                      {city}
+                    </a>
+                  ))}
+                </div>
+                <a href="/solcellskalkylator" class="flex items-center justify-center gap-1.5 w-full mt-4 py-2.5 rounded-lg font-syne font-700 text-[0.78rem] transition-all duration-150" style={}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  Beräkna för {zone.id}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="py-16 md:py-20 px-5" style="background: #0A1628; border-top: 1px solid rgba(30,45,66,0.5);">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-5 gap-10 items-center">
+          <div class="lg:col-span-2 relative">
+            <div class="relative rounded-2xl overflow-hidden" style="box-shadow: 0 0 60px rgba(0,0,0,0.4);">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Nöjd svensk familj hemma med solceller — sparar pengar på el" class="w-full h-[360px] object-cover object-center" loading="lazy" width="700" height="360" />
+              <div class="absolute inset-0" style="background: linear-gradient(to right, transparent 40%, rgba(10,22,40,0.8) 100%)"></div>
+            </div>
+          </div>
+          <div class="lg:col-span-3">
+            <span class="text-[11px] font-700 uppercase tracking-[2px] text-slate-600 block mb-4">Vad säger villaägarna?</span>
+            <h2 class="font-syne font-800 text-white text-2xl sm:text-[1.9rem] leading-tight mb-7">Smarta villaägare i Sverige<br/><span class="text-solar-amber">valde solceller 2024.</span></h2>
+            <div class="space-y-4">
+              <div class="p-4 rounded-xl" style="background: #060B16; border: 1px solid rgba(30,45,66,0.8);">
+                <p class="font-dm text-slate-300 text-[0.88rem] leading-relaxed italic mb-2">"Vi sparar ca 22 000 kr per år. Bästa beslutet vi tagit för huset."</p>
+                <div class="flex items-center gap-2"><span class="font-dm font-700 text-white text-[0.78rem]">Magnus L.</span><span class="text-slate-700 text-[10px]">—</span><span class="text-slate-600 text-[0.72rem]">Malmö</span><span class="text-[10px] font-700 px-1.5 py-0.5 rounded" style="color:#F59E0B;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);">SE4</span></div>
+              </div>
+              <div class="p-4 rounded-xl" style="background: #060B16; border: 1px solid rgba(30,45,66,0.8);">
+                <p class="font-dm text-slate-300 text-[0.88rem] leading-relaxed italic mb-2">"Kalkylatorn visade exakt vad vi kunde förvänta oss. Stämde bra med verkligheten."</p>
+                <div class="flex items-center gap-2"><span class="font-dm font-700 text-white text-[0.78rem]">Anna-Karin P.</span><span class="text-slate-700 text-[10px]">—</span><span class="text-slate-600 text-[0.72rem]">Uppsala</span><span class="text-[10px] font-700 px-1.5 py-0.5 rounded" style="color:#F97316;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.2);">SE3</span></div>
+              </div>
+              <div class="p-4 rounded-xl" style="background: #060B16; border: 1px solid rgba(30,45,66,0.8);">
+                <p class="font-dm text-slate-300 text-[0.88rem] leading-relaxed italic mb-2">"Skeptisk från början, men siffrorna talade sitt tydliga språk. Investerade direkt."</p>
+                <div class="flex items-center gap-2"><span class="font-dm font-700 text-white text-[0.78rem]">Erik H.</span><span class="text-slate-700 text-[10px]">—</span><span class="text-slate-600 text-[0.72rem]">Sundsvall</span><span class="text-[10px] font-700 px-1.5 py-0.5 rounded" style="color:#06B6D4;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);">SE2</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ TEASER -->
+    <section class="py-14 px-5" style="background: #060B16; border-top: 1px solid rgba(30,45,66,0.5);">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="text-[11px] font-700 uppercase tracking-[2px] text-slate-600 block mb-3">Vanliga frågor</span>
+          <h2 class="font-syne font-800 text-white text-2xl sm:text-[1.8rem]">Allt du undrar om <span class="text-solar-amber">solceller 2026</span></h2>
+        </div>
+        <div class="space-y-3 mb-8" id="faq-home">
+          <div class="faq-item rounded-xl overflow-hidden" style="background: #0A1628; border: 1px solid rgba(30,45,66,0.8);">
+            <button class="faq-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false">
+              <span class="font-dm font-700 text-white text-[0.9rem]">Lönar sig solceller på tak 2026?</span>
+              <svg class="faq-icon flex-shrink-0 text-solar-amber transition-transform duration-200 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer px-5 overflow-hidden" style="max-height:0; transition: max-height 0.3s ease-out;">
+              <p class="font-dm text-slate-400 text-[0.88rem] leading-relaxed pb-4">Ja, för de flesta villor i Sverige. Med det statliga Grön Teknik-avdraget på 14,55% och nuvarande elpriser är återbetalningstiden vanligtvis 7–11 år, följt av 20+ år med nästan gratis el.</p>
+            </div>
+          </div>
+          <div class="faq-item rounded-xl overflow-hidden" style="background: #0A1628; border: 1px solid rgba(30,45,66,0.8);">
+            <button class="faq-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false">
+              <span class="font-dm font-700 text-white text-[0.9rem]">Vad kostar solceller för en villa i Sverige?</span>
+              <svg class="faq-icon flex-shrink-0 text-solar-amber transition-transform duration-200 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer px-5 overflow-hidden" style="max-height:0; transition: max-height 0.3s ease-out;">
+              <p class="font-dm text-slate-400 text-[0.88rem] leading-relaxed pb-4">En typisk installation på 25–40 m² kostar 120 000–200 000 kr brutto. Med Grön Teknik-avdraget (max 50 000 kr per person) blir nettokostnaden 90 000–150 000 kr beroende på system och leverantör.</p>
+            </div>
+          </div>
+          <div class="faq-item rounded-xl overflow-hidden" style="background: #0A1628; border: 1px solid rgba(30,45,66,0.8);">
+            <button class="faq-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left" aria-expanded="false">
+              <span class="font-dm font-700 text-white text-[0.9rem]">Hur fungerar solcellskalkylatorn?</span>
+              <svg class="faq-icon flex-shrink-0 text-solar-amber transition-transform duration-200 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer px-5 overflow-hidden" style="max-height:0; transition: max-height 0.3s ease-out;">
+              <p class="font-dm text-slate-400 text-[0.88rem] leading-relaxed pb-4">Du anger takyta, postnummer, takets riktning och lutning. Kalkylatorn beräknar din årsproduktion baserat på lokala soltimmar, räknar av avdrag och visar ROI — direkt, utan registrering.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="/solcellskalkylator#faq" class="inline-flex items-center gap-2 font-dm font-600 text-[0.88rem] text-slate-500 hover:text-solar-amber transition-colors duration-150">
+            Se alla frågor om solceller
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-16 md:py-20 px-5 relative overflow-hidden" style="background: linear-gradient(135deg, #0A1628 0%, #060B16 50%, #0C1F10 100%);">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style="width:600px;height:300px;background:radial-gradient(ellipse, rgba(245,158,11,0.12) 0%, transparent 70%);" aria-hidden="true"></div>
+      <div class="relative max-w-2xl mx-auto text-center">
+        <span class="inline-flex items-center gap-2 mb-4 text-[11px] font-700 uppercase tracking-[2px] text-slate-600">
+          <span class="w-2 h-2 rounded-full bg-solar-green" style="box-shadow:0 0 8px #10B981; animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite;"></span>
+          Beräkna gratis — ingen registrering
+        </span>
+        <h2 class="font-syne font-800 text-white text-2xl sm:text-[2.2rem] lg:text-[2.6rem] leading-[1.1] mb-4">
+          Hur mycket sparar<br/><span class="text-solar-amber">just din villa?</span>
+        </h2>
+        <p class="font-dm text-slate-400 text-[1rem] leading-relaxed mb-3 max-w-[440px] mx-auto">Varje dag du väntar kostar pengar. Beräkna din personliga solcellskalkyl nu — på 30 sekunder.</p>
+        <p class="font-dm text-[0.8rem] mb-7" style="color: rgba(239,68,68,0.7);">En genomsnittlig villa förlorar ~11 700 kr/år utan solceller (SE3, 150 m² tak)</p>
+        <a href="/solcellskalkylator" class="inline-flex items-center gap-3 font-syne font-800 text-[1.05rem] text-black px-9 rounded-xl cta-pulse hover:scale-[1.02] active:scale-[0.97] transition-transform duration-150" style="padding-top:18px;padding-bottom:18px;background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%); box-shadow: 0 0 40px rgba(245,158,11,0.35), 0 8px 24px rgba(0,0,0,0.3);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Beräkna min besparing nu
+        </a>
+        <p class="text-[11px] text-slate-700 mt-4">100% gratis · Ej bindande · Ingen registrering krävs</p>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+
+  <style>
+    .home-fade-up { opacity:0; transform:translateY(20px); animation: homeFadeUp 0.65s ease-out forwards; }
+    @keyframes homeFadeUp { to { opacity:1; transform:translateY(0); } }
+    .faq-trigger { cursor:pointer; background:none; border:none; }
+    .faq-trigger:hover span:first-child { color:#F1F5F9; }
+    .faq-icon.open { transform:rotate(180deg); }
+    .faq-answer.open { max-height:200px !important; }
+  </style>
+
+  <script>
+    document.querySelectorAll(".faq-trigger").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".faq-item");
+        const answer = item?.querySelector(".faq-answer");
+        const icon = btn.querySelector(".faq-icon");
+        const isOpen = answer?.classList.contains("open");
+        document.querySelectorAll(".faq-answer").forEach(a => { a.classList.remove("open"); a.style.maxHeight = "0"; });
+        document.querySelectorAll(".faq-icon").forEach(i => i.classList.remove("open"));
+        document.querySelectorAll(".faq-trigger").forEach(b => b.setAttribute("aria-expanded","false"));
+        if (!isOpen && answer) {
+          answer.classList.add("open");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          icon?.classList.add("open");
+          btn.setAttribute("aria-expanded","true");
+        }
+      });
+    });
+    document.querySelectorAll(".city-chip").forEach(chip => {
+      const accent = chip.dataset.accent;
+      chip.addEventListener("mouseenter", () => { chip.style.color = accent; chip.style.borderColor = accent + "50"; chip.style.background = accent + "10"; });
+      chip.addEventListener("mouseleave", () => { chip.style.color = "#94A3B8"; chip.style.borderColor = "rgba(30,45,66,0.8)"; chip.style.background = "#060B16"; });
+    });
+  </script>
+</BaseLayout>

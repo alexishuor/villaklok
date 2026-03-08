@@ -1,0 +1,68 @@
+---
+const faqs = [
+  {
+    q: 'Är solceller lönsamt 2026 efter att 60-öringen försvunnit?',
+    a: 'Ja, solceller är fortfarande lönsamma 2026. Fokus har skiftat till egenkonsumtion — varje kWh du använder själv sparar 1,40–1,75 kr, jämfört med ~0,50 kr vid försäljning till nätet. Med batteri ökar självkonsumtionen från ~32% till ~65%, vilket ger avsevärt bättre lönsamhet trots en något högre investering.',
+  },
+  {
+    q: 'Vad är Grön Teknik-avdraget och hur mycket kan jag spara?',
+    a: 'Grön Teknik-avdraget ger dig 14,55% reduktion på solpanelskostnaden och 48,5% på batterilagring. Avdraget dras direkt av på fakturan av installatören (du behöver inte ansöka separat). Maxbeloppet är 50 000 kr per person och år, eller 100 000 kr för ett par som äger villan gemensamt.',
+  },
+  {
+    q: 'Hur lång är återbetalningstiden för solceller i Sverige 2026?',
+    a: 'Återbetalningstiden varierar beroende på elområde, takyta, takriktning och om du väljer batteri. I genomsnitt för en svensk villa: utan batteri ca 12–14 år, med batteri ca 10–12 år. I SE4 (Skåne/Malmö) med sydvänt tak kan den vara så kort som 9–10 år med batteri.',
+  },
+  {
+    q: 'Vad kostar solceller för en villa 2026?',
+    a: 'En typisk villa med 80 m² takyta kostar ca 195 000 kr brutto inklusive moms och installation. Efter Grön Teknik-avdraget på 14,55% landar nettoinvesteringen på ungefär 145 000 kr. Priset per installerad kW-peak (kWp) är ca 14 500 kr för system upp till 10 kWp, med volymrabatt för större system.',
+  },
+  {
+    q: 'Varför skiljer sig soltimmarna åt mellan SE1 och SE4?',
+    a: 'Soltimmarna varierar med breddgraden: Norrbotten (SE1) har ~800 kWh/kWp per år, medan Skåne (SE4) har ~1 050 kWh/kWp. Kombinerat med de högre elpriserna i söder gör detta att villaägare i SE4 har klart bäst förutsättningar, men solceller är lönsamt i hela Sverige.',
+  },
+];
+---
+<section id="faq" class="py-12 md:py-16 px-5 bg-navy-900 border-t border-navy-700">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="text-center mb-10">
+      <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy-800 border border-navy-600
+                   text-xs font-600 text-solar-amber tracking-widest uppercase mb-4">
+        Vanliga frågor
+      </span>
+      <h2 class="font-syne font-800 text-white text-2xl sm:text-3xl mb-2">
+        Allt du vill veta om <span class="text-solar-amber">solceller 2026</span>
+      </h2>
+      <p class="font-dm text-slate-500 text-sm">Svaren på de vanligaste frågorna</p>
+    </div>
+
+    <div class="bg-navy-800 border border-navy-600 rounded-2xl overflow-hidden divide-y divide-navy-600">
+      {faqs.map((faq, i) => (
+        <div class="faq-item">
+          <details>
+            <summary class="flex items-center justify-between px-5 py-4 cursor-pointer list-none group">
+              <span class="font-syne font-700 text-sm sm:text-base text-slate-300 group-open:text-solar-amber pr-4 transition-colors">
+                {faq.q}
+              </span>
+              <span class="faq-icon flex-shrink-0 w-5 h-5 text-solar-amber transition-transform duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </span>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-slate-400 leading-relaxed">
+              {faq.a}
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  details[open] summary .faq-icon { transform: rotate(45deg); }
+  details summary { transition: color 0.2s; }
+</style>
